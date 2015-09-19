@@ -1,8 +1,8 @@
 # Maintainer: kev <noreply@datageek.info>
  
 pkgname=shadowsocks-libev
-pkgver=2.3.0
-pkgrel=1
+pkgver=2.3.3
+pkgrel=0
 pkgdesc='A lightweight secured socks5 proxy for embedded devices and low end boxes.'
 arch=('any')
 url='https://github.com/shadowsocks/shadowsocks-libev'
@@ -12,13 +12,9 @@ source=("https://github.com/shadowsocks/shadowsocks-libev/archive/v$pkgver.tar.g
         'shadowsocks-libev@.service'
         'shadowsocks-libev-server@.service'
         'example.json')
-sha512sums=('8630a1780ce5f66b365dbc63f51f6ba0a41b61f11af826a278a5300e6a1bfbfaa74b4b7f55800c69612888630684fc1de3d7419fc22e437b95873a27e01c8722'
-            'a22a775490565dd978de52faeba33c8e99ae7151abab8fb535608ed2478fd940019927cebc3bc7febc66953ea0b949134dfd0d4c27065e50e9f06f257ffa7b7a'
-            '61126d18a82cc68fc9488ae62a8102932bec6c5171fa51c352c3abc5f50801ef15b2384ee59c5e02eda70504c025c8fc15579453517d36cdb45cd15488b432fe'
-            '7c3abfd73f1a5412a549ad69d40f88e289aa3059e06b491280453e706b0bc3ee28287d455c5d9a69ba3c72b22d1ce3cf3ad26f778b5929c6a6bd4d130b869ecf')
  
 prepare() {
-  cd $pkgname-$pkgver
+  cd "$pkgname-$pkgver"
   rm -r libev libsodium
  
   sed -e 's|libev/Makefile||' \
@@ -36,17 +32,22 @@ prepare() {
 }
  
 build() {
-  cd $pkgname-$pkgver
+  cd "$pkgname-$pkgver"
   ./autogen.sh
   ./configure --prefix=/usr
   make
 }
  
 package() {
-  cd $pkgname-$pkgver
-  make DESTDIR="$pkgdir/" install
+  cd "$pkgname-$pkgver"
+  make DESTDIR="$pkgdir" install
  
   install -Dm644 "$srcdir/example.json"  "$pkgdir/etc/shadowsocks/example.json"
   install -Dm644 "$srcdir/shadowsocks-libev@.service" "$pkgdir/usr/lib/systemd/system/shadowsocks-libev@.service"
   install -Dm644 "$srcdir/shadowsocks-libev-server@.service" "$pkgdir/usr/lib/systemd/system/shadowsocks-libev-server@.service"
 }
+
+md5sums=('906fe1550178aa863fd09fcecc06c927'
+         'e15494f943d1a7605054000acb0362ed'
+         'a57ac46f329d0ad4f42366485d23181a'
+         'a52e33ffe667a8d1a18fb0b5641b9b3a')
