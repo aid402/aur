@@ -1,7 +1,7 @@
 # Maintainer: kev <noreply@datageek.info>
  
 pkgname=shadowsocks-libev
-pkgver=2.3.3
+pkgver=2.4.0
 pkgrel=1
 pkgdesc='A lightweight secured socks5 proxy for embedded devices and low end boxes.'
 arch=('armv6h' 'armv7h')
@@ -47,7 +47,7 @@ package() {
   install -Dm644 "$srcdir/shadowsocks-libev-server@.service" "$pkgdir/usr/lib/systemd/system/shadowsocks-libev-server@.service"
 }
 
-md5sums=('906fe1550178aa863fd09fcecc06c927'
+md5sums=('8711cfcbcc1d32daed102421a7c546b3'
          'e15494f943d1a7605054000acb0362ed'
          'a57ac46f329d0ad4f42366485d23181a'
          'a52e33ffe667a8d1a18fb0b5641b9b3a')
