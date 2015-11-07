@@ -1,0 +1,25 @@
+# Maintainer: kev <noreply@datageek.info>
+ 
+pkgname=docker
+pkgver=1.9.0
+pkgrel=1
+pkgdesc='Pack, ship and run any application as a lightweight container'
+arch=('armv6h' 'armv7h')
+url='https://github.com/docker/docker'
+license=('APACHE')
+source=('docker-1.9.0-armv6h'
+        'docker.service'
+        'docker.socket'
+        'docker')
+ 
+package() {
+  install -Dm755 "$srcdir/docker-1.9.0-armv6h"  "$pkgdir/usr/bin/docker"
+  install -Dm644 "$srcdir/docker.service" "$pkgdir/usr/lib/systemd/system/docker.service"
+  install -Dm644 "$srcdir/docker.socket" "$pkgdir/usr/lib/systemd/system/docker.socket"
+  install -Dm644 "$srcdir/docker" "$pkgdir/etc/default/docker"
+}
+
+md5sums=('0a8baf6f625adf0a2289045de85fa3ad'
+         '804b6886f3b1ba92ae0a4c7e3eef8836'
+         'bfcdf23967fc9b4e9d8d4d22ee4daafe'
+         '3c3bd699c26fa8bd5521219fd22ef560')
