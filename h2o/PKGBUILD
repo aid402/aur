@@ -1,0 +1,36 @@
+# $Id$
+# Maintainer: kev <noreply@datageek.info>
+# Contributor: Kazuho Oku <kazuho@natadeco.co>
+
+pkgname=h2o
+pkgver=1.5.4
+pkgrel=1
+pkgdesc='An optimized HTTP server with support for HTTP/1.x and HTTP/2'
+arch=('armv6h' 'armv7h')
+url='https://h2o.examp1e.net/'
+license=('MIT')
+depends=('openssl')
+backup=('etc/h2o/h2o.conf')
+source=(https://github.com/h2o/h2o/archive/v$pkgver.tar.gz
+        index.html
+        h2o.conf
+        h2o.service)
+md5sums=('dcf9feac9c3ff1e7fe7f1bb41afe4d56'
+         '21dde95d9d269cbb2fa6560309dca40c'
+         'feca5e386728f9e1b4515a41e57c33f0'
+         'b382ee9a4bbc59619105918dbaa65db5')
+
+build() {
+  cd $pkgname-$pkgver
+  cmake -DWITH_BUNDLED_SSL=off -DCMAKE_INSTALL_PREFIX=/usr .
+  make
+}
+
+package() {
+  cd $pkgname-$pkgver
+  make DESTDIR="$pkgdir" install
+  install -dm750 "$pkgdir"/var/log/h2o
+  install -Dm644 $srcdir/index.html "$pkgdir"/usr/share/h2o/html/index.html
+  install -Dm644 $srcdir/h2o.conf "$pkgdir"/etc/h2o/h2o.conf
+  install -Dm644 $srcdir/h2o.service "$pkgdir"/usr/lib/systemd/system/h2o.service
+}

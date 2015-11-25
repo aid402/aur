@@ -1,0 +1,9 @@
+[Unit]
+Description=An optimized HTTP server with support for HTTP/1.x and HTTP/2
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/h2o -c /etc/h2o/h2o.conf
+
+[Install]
+WantedBy=multi-user.target
