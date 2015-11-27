@@ -1,0 +1,11 @@
+[Unit]
+Description=Secure Tunnels To Localhost
+Documentation=https://ngrok.com/docs
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/ngrok start --config /etc/ngrok.yml --log stdout --all
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

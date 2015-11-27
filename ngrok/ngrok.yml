@@ -1,0 +1,8 @@
+#authtoken: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+console_ui: false
+web_addr: false
+tunnels:
+  ssh:
+    proto: tcp
+    addr: 22
+    inspect: false

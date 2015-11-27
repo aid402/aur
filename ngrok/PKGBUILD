@@ -1,0 +1,23 @@
+# $Id$
+# Maintainer: kev <noreply@datageek.info>
+# Contributor: Alan Shreve <alan@inconshreveable.com>
+ 
+pkgname=ngrok
+pkgver=2.0.19
+pkgrel=1
+pkgdesc='Introspected tunnels to localhost '
+arch=('armv6h' 'armv7h')
+url='https://github.com/inconshreveable/ngrok'
+license=('APACHE')
+source=("https://dl.ngrok.com/ngrok_${pkgver}_linux_arm.zip"
+        'ngrok.service'
+        'ngrok.yml')
+md5sums=('45655b64db6419f589301a3e9f8b3ced'
+         'a81705243fd45843e25ef76d2d4153bc'
+         '5b9351d0c3eb07bdb1f48b38f251705e')
+
+package() {
+  install -Dm755 "$srcdir/ngrok"  "$pkgdir/usr/bin/ngrok"
+  install -Dm644 "$srcdir/ngrok.service" "$pkgdir/usr/lib/systemd/system/ngrok.service"
+  install -Dm644 "$srcdir/ngrok.yml" "$pkgdir/etc/ngrok.yml"
+}
