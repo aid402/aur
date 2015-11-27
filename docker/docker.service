@@ -13,4 +13,4 @@ LimitNPROC=1048576
 LimitCORE=infinity
 
 [Install]
-WantedBy=multi-user.target
+Also=docker.socket
